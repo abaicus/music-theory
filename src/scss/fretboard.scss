@@ -1,0 +1,64 @@
+.fretboard {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 200px 0;
+  max-width: 1000px;
+  align-items: center;
+
+  .string-wrap {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #cecece;
+    padding-bottom: 10px;
+
+    &:first-child {
+      padding-top: 10px;
+      border-top: 1px solid #cecece;
+    }
+
+    &.fret-numbers {
+			opacity: .3;
+			.note {
+				background-color: transparent;
+				&:nth-child(4),
+				&:nth-child(6),
+				&:nth-child(8),
+				&:nth-child(10) {
+					background-color: #eee;
+				}
+			}
+    }
+  }
+
+  .note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    position: relative;
+		border-radius: 3px;
+
+    &:nth-child(4),
+    &:nth-child(6),
+    &:nth-child(8),
+    &:nth-child(10) {
+      background-color: #cecece;
+    }
+
+    &.fret-number {
+      background: none;
+    }
+  }
+
+  .root-note,
+  .note:nth-child(14) {
+    background-color: #333;
+    color: #fff;
+		opacity: .75;
+  }
+
+	.note:nth-child(1) {
+		opacity: .25;
+	}
+}

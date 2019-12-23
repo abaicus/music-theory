@@ -1,0 +1,12 @@
+$primary-color: #ff8409;
+$gray: #333;
+$mild-gray: #cec;
+
+.dark {
+	$gray: #fff;
+	$mild-gray: #cec;
+}
+
+@import "~spectre.css/src/spectre";
+@import "header";
+@import "fretboard";
