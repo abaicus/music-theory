@@ -1,12 +1,19 @@
 $primary-color: #ff8409;
-$gray: #333;
-$mild-gray: #cec;
-
-.dark {
-	$gray: #fff;
-	$mild-gray: #cec;
-}
+$dark-color: #333;
 
 @import "~spectre.css/src/spectre";
+
+html, body, .app-wrap, #root {
+	height: 100%;
+}
+
 @import "header";
+@import "dark-mode";
 @import "fretboard";
+
+
+.control-cols {
+	max-width: 600px;
+	margin: 30px auto;
+	align-items: center;
+}

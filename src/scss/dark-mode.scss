@@ -1,0 +1,6 @@
+.dark {
+  background-color: #111;
+  .fretboard, .control-cols {
+    filter: invert(5);
+  }
+}

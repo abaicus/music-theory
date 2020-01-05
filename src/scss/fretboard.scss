@@ -1,64 +1,46 @@
 .fretboard {
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
   padding: 200px 0;
-  max-width: 1000px;
-  align-items: center;
-
+  border-spacing: 0;
   .string-wrap {
-    display: flex;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #cecece;
-    padding-bottom: 10px;
-
-    &:first-child {
-      padding-top: 10px;
-      border-top: 1px solid #cecece;
+    border-spacing: 0;
+    box-sizing: border-box;
+		&.fret-numbers {
+			opacity: .25;
+		}
+    .string-no {
+      opacity: .25;
     }
 
-    &.fret-numbers {
-			opacity: .3;
-			.note {
-				background-color: transparent;
-				&:nth-child(4),
-				&:nth-child(6),
-				&:nth-child(8),
-				&:nth-child(10) {
-					background-color: #eee;
-				}
-			}
+    &:nth-child(2n):not(.fret-numbers) {
+      background-color: #ededed;
     }
   }
-
   .note {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    //border-bottom: 1px solid $border-color-light;
+    border-right: 1px solid $border-color-light;
     width: 60px;
-    position: relative;
-		border-radius: 3px;
-
-    &:nth-child(4),
-    &:nth-child(6),
-    &:nth-child(8),
-    &:nth-child(10) {
-      background-color: #cecece;
+    text-align: center;
+    padding: 7px 10px;
+    .note-wrap {
+      display: block;
+      border-radius: 3px;
+      width: 100%;
     }
 
-    &.fret-number {
-      background: none;
+    &.root-note {
+      .note-wrap {
+        background-color: $dark-color;
+        opacity: .4;
+        color: #fff;
+      }
+    }
+
+    &.dot-fret {
+      background-color: fade_out($dark-color, 0.2);
+      .note-wrap {
+        color: #fff;
+      }
     }
   }
-
-  .root-note,
-  .note:nth-child(14) {
-    background-color: #333;
-    color: #fff;
-		opacity: .75;
-  }
-
-	.note:nth-child(1) {
-		opacity: .25;
-	}
 }

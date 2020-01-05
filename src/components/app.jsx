@@ -1,6 +1,6 @@
 import React from 'react';
 import { notes, strings } from '../store/data.js';
-
+import Note from './note.jsx';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -11,34 +11,43 @@ export default class App extends React.Component {
   render() {
     const { guitarStrings } = this;
     return (
-      <section className="fretboard">
-        {this.renderNumberRow()}
-        {guitarStrings.map((note, stringIndex) => {
-          return (
-            <div className="string-wrap" key={stringIndex}>
-              <span className="note string-no">{6 - stringIndex}</span>
-              <span className="root-note note">{note}</span>
-              {notes.map(item => {
-                if (item === note) {
-                  const start = notes.indexOf(note),
-                    remaining = notes.slice(start + 1),
-                    newNotes = remaining.concat(notes),
-                    final = newNotes.slice(0, 12);
-                  return final.map((finalNote, indexInOctave) => {
-                    return (
-                      <span className="note" key={indexInOctave}>
-                        {finalNote}
-                        {/*{stringIndex}|{indexInOctave}*/}
-                      </span>
-                    );
-                  });
-                }
-              })}
-            </div>
-          );
-        })}
-        {this.renderNumberRow()}
-      </section>
+      <table className="fretboard">
+        <tbody>
+          {this.renderNumberRow()}
+          {guitarStrings.map((note, stringIndex) => {
+            return (
+              <tr className="string-wrap" key={stringIndex}>
+                <Note isStringNo={true} key={stringIndex}>
+                  {6 - stringIndex}
+                </Note>
+                <Note isRootNote={true} key={note}>
+                  {note}
+                </Note>
+                {notes.map(item => {
+                  if (item === note) {
+                    const start = notes.indexOf(note),
+                      remaining = notes.slice(start + 1),
+                      newNotes = remaining.concat(notes),
+                      final = newNotes.slice(0, 12);
+                    return final.map((finalNote, indexInOctave) => {
+                      return (
+                        <Note
+                          isDotFret={[2, 4, 6, 8].includes(indexInOctave)}
+                          isRootNote={indexInOctave === 11}
+                          key={indexInOctave + finalNote}
+                        >
+                          {finalNote}
+                        </Note>
+                      );
+                    });
+                  }
+                })}
+              </tr>
+            );
+          })}
+          {this.renderNumberRow()}
+        </tbody>
+      </table>
     );
   }
 
@@ -46,16 +55,16 @@ export default class App extends React.Component {
     const fretIndexes = [...Array(14).keys()];
 
     return (
-      <div className="string-wrap fret-numbers">
+      <tr className="string-wrap fret-numbers">
         {fretIndexes.map(index => {
-          if (index === 0) return <span className="note" />;
+          if (index === 0) return <Note className="note" key={index} />;
           return (
-            <span className="note fret-number" key={index}>
-              {index - 1}
-            </span>
+            <Note isFretNumber={true} key={index}>
+              { [4, 6, 8, 10, 13].includes(index) ? index - 1 : ''}
+            </Note>
           );
         })}
-      </div>
+      </tr>
     );
   }
 }
